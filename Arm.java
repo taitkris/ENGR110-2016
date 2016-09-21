@@ -129,6 +129,7 @@ public class Arm
             valid_state = true;
             // half distance between tool positions
             double  h = Math.sqrt(Math.pow(r,2)-.5*(d/2));
+            double alpha = Math.atan((yj1-yj2)/(xj2-xj1));
             //   tool position
             xt = xa + h*Math.cos(Math.PI/2 -alpha);
             yt = ya + h*Math.sin(Math.PI/2 -alpha);
