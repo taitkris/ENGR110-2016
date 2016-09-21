@@ -124,19 +124,18 @@ public class Arm
        double  xa = xj1 + (0.5*(xj2 - xj1));
        double  ya = yj1 + (0.5*(yj2 - yj1));
        // distance between joints
-       //double d = ;
-       if (d<2*r){
-           valid_state = true;
-         // half distance between tool positions
-         //double  h = ;
-         //double alpha= ...;
-         // tool position
-        // double xt = xa + h*cos(((Math.pi)/2)-alpha);
-        // double yt = ...;
-         //  xt2 = xa - h.*cos(alpha-pi/2);
-         //  yt2 = ya - h.*sin(alpha-pi/2);
-       } else {
-           valid_state = false;
+      double d = Math.sqrt(Math.pow(xj2-xj1,2)+Math.pow(yj2-yj1,2));//whaaaat maatttee
+        if (d<2*r){
+            valid_state = true;
+            // half distance between tool positions
+            double  h = Math.sqrt(Math.pow(r,2)-.5*(d/2));
+            //   tool position
+            xt = xa + h*Math.cos(Math.PI/2 -alpha);
+            yt = ya + h*Math.sin(Math.PI/2 -alpha);
+            xt2 = xa - h*Math.cos(alpha-Math.PI/2);
+            yt2 = ya - h*Math.sin(alpha-Math.PI/2);
+        } else {
+            valid_state = false;
         }
        
     }
