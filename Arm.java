@@ -127,7 +127,7 @@ public class Arm
         if (d<2*r){
             valid_state = true;
             // half distance between tool positions
-            double  h = Math.sqrt(Math.pow(r,2)-Math.pow(0.5*(j2-j1),2));
+            double  h = Math.sqrt(Math.pow(r,2)-Math.pow(d/2,2));
             //   tool position
             xt = xa + h*Math.cos(Math.PI/2 -alpha);
             yt = ya + h*Math.sin(Math.PI/2 -alpha);
@@ -210,7 +210,7 @@ public class Arm
         double h2 = Math.sqrt(r*r - d2*d2/4);
         // elbows positions
         //double angle = Math.atan2(yt-ym2, xt-xm2);
-        double angle = Math.atan((yt-ym2)/(xm2-xt))
+        double angle = Math.atan((yt-ym2)/(xm2-xt));
 
         xj2 = xm2 + dx2/2 - h2*Math.cos(Math.PI/2.0 - angle);//.............................................................
         yj2 = ym2 + dy2/2 - h2*Math.sin(Math.PI/2.0 - angle);//.............................................................
