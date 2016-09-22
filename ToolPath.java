@@ -26,7 +26,7 @@ public class ToolPath
 {
     int n_steps; //straight line segmentt will be broken
     // into that many sections
-
+ 
     // storage for angles and 
     // moto control signals
     ArrayList<Integer> theta1_vector;
