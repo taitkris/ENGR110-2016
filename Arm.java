@@ -184,8 +184,8 @@ public class Arm
         double alpha = Math.atan2(yt-ym1, xt-xm1);
 
         // elbows positions
-        xj1 = xm1 + dx1/2 - h1*Math.cos(Math.PI/2-alpha); 
-        yj1 = ym1 + dy1/2 - h1*Math.sin(Math.PI/2-alpha);
+        xj1 = xm1 + dx1/2 - h1*Math.cos(Math.PI/2+alpha); 
+        yj1 = ym1 + dy1/2 - h1*Math.sin(Math.PI/2+alpha);
 
         theta1 = Math.atan2(yj1-ym1, xj1-xm1);
         if ((theta1>0)||(theta1<-Math.PI)){
