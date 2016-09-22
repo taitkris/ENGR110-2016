@@ -1,5 +1,4 @@
 
-
 /**
  * ToolPath stores motor contol signals (pwm)
  * and motor angles
@@ -30,8 +29,8 @@ public class ToolPath
 
     // storage for angles and 
     // moto control signals
-    ArrayList<Double> theta1_vector;
-    ArrayList<Double> theta2_vector;
+    ArrayList<Integer> theta1_vector;
+    ArrayList<Integer> theta2_vector;
     ArrayList<Integer> pen_vector;
     ArrayList<Integer> pwm1_vector;
     ArrayList<Integer> pwm2_vector;
@@ -44,8 +43,8 @@ public class ToolPath
     {
         // initialise instance variables
         n_steps = 50;
-        theta1_vector = new ArrayList<Double>();
-        theta2_vector = new ArrayList<Double>();
+        theta1_vector = new ArrayList<Integer>();
+        theta2_vector = new ArrayList<Integer>();
         pen_vector = new ArrayList<Integer>();
         pwm1_vector = new ArrayList<Integer>();
         pwm2_vector = new ArrayList<Integer>();
@@ -66,23 +65,28 @@ public class ToolPath
                 double x = p0.get_x() + j*(p1.get_x()-p0.get_x())/n_steps;
                 double y = p0.get_y() + j*(p1.get_y()-p0.get_y())/n_steps;
                 arm.inverseKinematic(x, y);
-                theta1_vector.add(arm.get_theta1()*180/Math.PI);
-                theta2_vector.add(arm.get_theta2()*180/Math.PI);
+                theta1_vector.add((int)(10.183*((-1)*arm.get_theta1()*180/Math.PI) + 234.85));
+                theta2_vector.add((int)(9.92*((-1)*arm.get_theta2()*180/Math.PI) + 870.63));
+                //theta1_vector.add(arm.get_theta1()*180/Math.PI);
+                //theta2_vector.add(arm.get_theta2()*180/Math.PI);
+
                 if (p0.get_pen()){ 
-                    pen_vector.add(1);
+                    pen_vector.add(1300);
                 } else {
-                    pen_vector.add(0);
+                    pen_vector.add(1000);
                 }
             }
         }
-        convert_angles_to_pwm(fname);
+        //convert_angles_to_pwm(fname);
+        save_angles(fname);
+        UI.print("completed convert_angles_to_pwm(fname)\n");
     }
 
     public void save_angles(String fname){
-        for ( int i = 0 ; i < theta1_vector.size(); i++){
-            UI.printf(" t1=%3.1f t2=%3.1f pen=%d\n",
-                theta1_vector.get(i),theta2_vector.get(i),pen_vector.get(i));
-        }
+        //         for ( int i = 0 ; i < theta1_vector.size(); i++){
+        //             UI.printf(" t1=%3.1f t2=%3.1f pen=%d\n",
+        //                 theta1_vector.get(i),theta2_vector.get(i),pen_vector.get(i));
+        //         }
 
         try {
             //Whatever the file path is.
@@ -92,7 +96,7 @@ public class ToolPath
             Writer w = new BufferedWriter(osw);
             String str_out;
             for (int i = 1; i < theta1_vector.size() ; i++){
-                str_out = String.format("%3.1f,%3.1f,%d\n",
+                str_out = String.format("%d,%d,%d\n",
                     theta1_vector.get(i),theta2_vector.get(i),pen_vector.get(i));
                 w.write(str_out);
             }
@@ -100,7 +104,7 @@ public class ToolPath
         } catch (IOException e) {
             UI.println("Problem writing to the file statsTest.txt");
         }
-
+        UI.print("completed save_angles\n");
     }
 
     // takes sequence of angles and converts it 
@@ -109,11 +113,12 @@ public class ToolPath
         // for each angle
         for (int i=0 ; i < theta1_vector.size();i++){
             //arm.set_angles(theta1_vector.get(i),theta2_vector.get(i));
-
-            pwm1_vector.add(10.183*(theta1_vector.get(i)) + 234.85);
-            pwm2_vector.add(9.92*(theta2_vector.get(i)) + 870.63);
+            UI.print("in convert_angles_to_pwm\n");
+            pwm1_vector.add((int)(10.183*(theta1_vector.get(i)) + 234.85));
+            pwm2_vector.add((int)(9.92*(theta2_vector.get(i)) + 870.63));
         }
         save_pwm_file(fname);
+        UI.print("completed convert_angles_to_pwm\n");
     }
 
     // save file with motor control values
@@ -131,8 +136,8 @@ public class ToolPath
             Writer w = new BufferedWriter(osw);
             String str_out;
             for (int i = 1; i < pwm1_vector.size() ; i++){
-                str_out = String.format("%3.1f,%3.1f,%d\n",
-                    pwm1_vector.get(i),pwm2_vector.get(i),pen_vector.get(i)); //check pen vector value later 
+                str_out = String.format("%d,%d\n",
+                    pwm1_vector.get(i),pwm2_vector.get(i)); //check pen vector value later 
                 w.write(str_out);
             }
             w.close();
