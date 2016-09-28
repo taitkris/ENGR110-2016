@@ -52,10 +52,14 @@ public class Arm
      */
     public Arm()
     {
-        xm1 = 290; // set motor coordinates
-        ym1 = 372;
-        xm2 = 379;
-        ym2 = 374;
+       // xm1 = 290; // set motor coordinates
+        //ym1 = 372;
+        //xm2 = 379;
+        //ym2 = 374;
+        xm1 = 285
+        ym1 = 385
+        xm2 = 373
+        ym2 = 385
         r = 156.0;
         theta1 = -90.0*Math.PI/180.0; // initial angles of the upper arms
         theta2 = -90.0*Math.PI/180.0;
