@@ -26,7 +26,7 @@ public class ToolPath
 {
     int n_steps; //straight line segmentt will be broken
     // into that many sections
- 
+
     // storage for angles and 
     // moto control signals
     ArrayList<Integer> theta1_vector;
@@ -67,6 +67,11 @@ public class ToolPath
                 arm.inverseKinematic(x, y);
                 theta1_vector.add((int)(10.183*((-1)*arm.get_theta1()*180/Math.PI) + 234.85));
                 theta2_vector.add((int)(9.92*((-1)*arm.get_theta2()*180/Math.PI) + 870.63));
+
+				//new calibration equations (not original arm)
+                //theta1_vector.add((int)(10.17*((-1)*arm.get_theta1()*180/Math.PI) - 35.686));
+				//theta2_vector.add((int)(10.02*((-1)*arm.get_theta2()*180/Math.PI) + 1000 - 92.379));
+
                 //theta1_vector.add(arm.get_theta1()*180/Math.PI);
                 //theta2_vector.add(arm.get_theta2()*180/Math.PI);
 
