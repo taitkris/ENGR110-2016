@@ -204,7 +204,13 @@ public class Arm
         
         double distToM1 = Math.sqrt(Math.pow(xt-xm1,2)+Math.pow(yt-ym1,2));
         double distToM2 = Math.sqrt(Math.pow(xt-xm2,2)+Math.pow(yt-ym2,2));
-
+        double distBetweenJs = Math.sqrt(Math.pow(xj1-xj2,2)+Math.pow(yj1-yj2,2));
+        
+        if(distBetweenJs>r*2-0.7){
+            valid_state = false;
+            UI.println("angles are essentially paralell cancer");
+            return;
+        }
         if (yt+10>ym1||distToM1<25||distToM2<25){
             valid_state = false;
             UI.println("too far down || too close to motors.");
