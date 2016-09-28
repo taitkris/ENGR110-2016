@@ -159,11 +159,11 @@ public class Main{
         //         this.doMouse("clicked", x2, y);
         //         this.doMouse("clicked", x3, y);
         //         this.doMouse("clicked", x4, y);
-        
+
         double y = 194.0;
         double x1 = 286.0;
         double x2 = 348.0;
-        
+
         this.doMouse("clicked", x1, y);
         this.doMouse("clicked", x2, y);
     }
@@ -189,20 +189,41 @@ public class Main{
 
     public void drawCircle(){
         state = 2;
-        double r = 55.5;
-        double x1 = 277.0;
-        double y1 = 266.0;
-        double x2 = 388.0;
-        double y2 = 266.0;
 
-        double topHalfX1 = Math.sqrt((Math.pow(r,2) - Math.pow(x1,2))); //first x ordinate
-        double topHalfY1 = Math.sqrt(( Math.pow(r,2) - Math.pow(y1,2))); //first y ordinate
-        double topHalfX2 = Math.sqrt((Math.pow(r,2) - Math.pow(x2,2))); //second x ordinate
-        double topHalfY2 = Math.sqrt(( Math.pow(r,2) - Math.pow(y2,2))); //second y ordinate
+        //         double r = 55.5;
+        //         double x1 = 277.0;
+        //         double y1 = 266.0;
+        //         double x2 = 388.0;
+        //         double y2 = 266.0;
+        // 
+        //         double topHalfX1 = Math.sqrt((Math.pow(r,2) - Math.pow(x1,2))); //first x ordinate
+        //         double topHalfY1 = Math.sqrt(( Math.pow(r,2) - Math.pow(y1,2))); //first y ordinate
+        //         double topHalfX2 = Math.sqrt((Math.pow(r,2) - Math.pow(x2,2))); //second x ordinate
+        //         double topHalfY2 = Math.sqrt(( Math.pow(r,2) - Math.pow(y2,2))); //second y ordinate
 
-        this.doMouse("clicked", topHalfX1, topHalfY1); //draws from first ordinates
-        this.doMouse("clicked", topHalfX2, topHalfY2); //draws to second ordinates
+        //this.doMouse("clicked", topHalfX1, topHalfY1); //draws from first ordinates
+        //this.doMouse("clicked", topHalfX2, topHalfY2); //draws to second ordinates
 
+        double y = 200;
+        //double yNegative = 200;
+        double x0 = 330;
+        double y0 = 200;
+        double r = 34;
+
+        //         for(int i = 296; i < 365; i += 2){ //draws bottom half
+        //             y = Math.sqrt( Math.pow(r,2) - Math.pow((i-x0),2) + y0) + 200;
+        //             this.doMouse("clicked", i, y);
+        //         }
+
+        for(int i = 364; i > 295; i -= 4){ //draws top half
+            y = -1*(Math.sqrt( Math.pow(r,2) - Math.pow((i-x0),2))) + y0;
+            this.doMouse("clicked", i, y);
+        }
+
+        for(int i = 296; i < 365; i += 4){ //draws over bottom half
+            y = Math.sqrt(Math.pow(r,2) - Math.pow((i-x0),2)) + 200;
+            this.doMouse("clicked", i, y);
+        }
     }
     // save angles into the file
     public void save_ang(){
@@ -227,8 +248,9 @@ public class Main{
 
     public void sendToPi() {
         try{
-            Process p = Runtime.getRuntime().exec("pscp -l pi -pw pi pathLine.txt pi@10.140.153.16:/home/pi/Arm/");
+            Process p = Runtime.getRuntime().exec("pscp -l pi -pw pi pathCircleRough.txt pi@10.140.153.83:/home/pi/Arm/");
             UI.println("Sent");
+			//10.140.153.16
         }catch(Exception e){
             UI.println(e);
         }
