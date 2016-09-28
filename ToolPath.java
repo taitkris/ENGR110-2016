@@ -56,10 +56,10 @@ public class ToolPath
     public void convert_drawing_to_angles(Drawing drawing,Arm arm,String fname){
 
         // for all points of the drawing...        
-        for (int i = 0;i < drawing.get_drawing_size()-1;i++){ 
+        for (int i = 1;i < drawing.get_drawing_size();i++){ 
             // take two points
-            PointXY p0 = drawing.get_drawing_point(i);
-            PointXY p1 = drawing.get_drawing_point(i+1);
+            PointXY p0 = drawing.get_drawing_point(i-1);
+            PointXY p1 = drawing.get_drawing_point(i);
             // break line between points into segments: n_steps of them
             for ( int j = 0 ; j< n_steps;j++) { // break segment into n_steps str. lines
                 double x = p0.get_x() + j*(p1.get_x()-p0.get_x())/n_steps;
@@ -75,8 +75,8 @@ public class ToolPath
                 //theta1_vector.add(arm.get_theta1()*180/Math.PI);
                 //theta2_vector.add(arm.get_theta2()*180/Math.PI);
 
-                if (p0.get_pen()){ 
-                    pen_vector.add(1300);
+                if (p1.get_pen()){ 
+                    pen_vector.add(2000);
                 } else {
                     pen_vector.add(1000);
                 }
