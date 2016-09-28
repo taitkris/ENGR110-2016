@@ -182,9 +182,13 @@ public class Main{
         double y5 = 234.0;
         this.doMouse("clicked", x1, y1);
         this.doMouse("clicked", x2, y2);
+        this.doMouse("clicked", x2, y2); //double up
         this.doMouse("clicked", x3, y3);
+        this.doMouse("clicked", x3, y3); //double up
         this.doMouse("clicked", x4, y4);
+        this.doMouse("clicked", x4, y4); //double up
         this.doMouse("clicked", x5, y5);        
+        this.doMouse("clicked", x5, y5); //double up
     }
 
     public void drawCircle(){
@@ -215,12 +219,12 @@ public class Main{
         //             this.doMouse("clicked", i, y);
         //         }
 
-        for(int i = 364; i > 295; i -= 4){ //draws top half
+        for(int i = 364; i > 295; i -= 6){ //draws top half
             y = -1*(Math.sqrt( Math.pow(r,2) - Math.pow((i-x0),2))) + y0;
             this.doMouse("clicked", i, y);
         }
 
-        for(int i = 296; i < 365; i += 4){ //draws over bottom half
+        for(int i = 296; i < 365; i += 6){ //draws over bottom half
             y = Math.sqrt(Math.pow(r,2) - Math.pow((i-x0),2)) + 200;
             this.doMouse("clicked", i, y);
         }
@@ -248,7 +252,7 @@ public class Main{
 
     public void sendToPi() {
         try{
-            Process p = Runtime.getRuntime().exec("pscp -l pi -pw pi pathCircleRough.txt pi@10.140.153.83:/home/pi/Arm/");
+            Process p = Runtime.getRuntime().exec("pscp -l pi -pw pi pathLine.txt pi@10.140.153.83:/home/pi/Arm/");
             UI.println("Sent");
 			//10.140.153.16
         }catch(Exception e){
