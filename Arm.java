@@ -137,26 +137,6 @@ public class Arm
             valid_state = false;
         }
 
-        /*
-        // midpoint between joints
-        //double  xa =.... ;
-        //double  ya =.... ;
-        // distance between joints
-        //double d = ...;
-        if (d<2*r){
-        valid_state = true;
-        // half distance between tool positions
-        //double  h = ...;
-        //double alpha= ...;
-        // tool position
-        // double xt = ...;
-        // double yt = ...;
-        //  xt2 = xa - h.*cos(alpha-pi/2);
-        //  yt2 = ya - h.*sin(alpha-pi/2);
-        } else {
-        valid_state = false;
-        }
-         */
     }
 
     // motor angles from tool position
@@ -221,7 +201,17 @@ public class Arm
             UI.println("Ange 2 -invalid");
             return;
         }
+        
+        double distToM1 = Math.sqrt(Math.pow(xt-xm1,2)+Math.pow(yt-ym1,2));
+        double distToM2 = Math.sqrt(Math.pow(xt-xm2,2)+Math.pow(yt-ym2,2));
 
+        if (yt+10>ym1||distToM1<25||distToM2<25){
+            valid_state = false;
+            UI.println("too far down || too close to motors.");
+            return;
+        }
+        
+        
         UI.printf("xt:%3.1f, yt:%3.1f\n",xt,yt);
         UI.printf("theta1:%3.1f, theta2:%3.1f\n",theta1*180/Math.PI,theta2*180/Math.PI);
         return;
