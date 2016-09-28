@@ -56,10 +56,10 @@ public class Arm
         //ym1 = 372;
         //xm2 = 379;
         //ym2 = 374;
-        xm1 = 285
-        ym1 = 385
-        xm2 = 373
-        ym2 = 385
+        xm1 = 285;
+        ym1 = 385;
+        xm2 = 373;
+        ym2 = 385;
         r = 156.0;
         theta1 = -90.0*Math.PI/180.0; // initial angles of the upper arms
         theta2 = -90.0*Math.PI/180.0;
@@ -194,10 +194,10 @@ public class Arm
         double h2 = Math.sqrt(r*r - d2*d2/4);
         // elbows positions
         //double angle = Math.atan2(yt-ym2, xt-xm2);
-        double angle = Math.atan((yt-ym2)/(xm2-xt));
-
-        xj2 = xm2 + dx2/2 - h2*Math.cos(Math.PI/2.0 - angle);//.............................................................
-        yj2 = ym2 + dy2/2 - h2*Math.sin(Math.PI/2.0 - angle);//.............................................................
+        double angle = Math.atan2(yt-ym2, xt-xm2);
+        
+        xj2 = xm2 + dx2/2 - h2*Math.cos(angle - Math.PI/2.0 );//.............................................................
+        yj2 = ym2 + dy2/2 - h2*Math.sin(angle - Math.PI/2.0 );//.............................................................
         // motor angles for both 1st elbow positions
         theta2 = Math.atan2((yj2-ym2), (xj2-xm2));
         if ((theta2>0)||(theta2<-Math.PI)){
